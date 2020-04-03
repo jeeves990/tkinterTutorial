@@ -14,6 +14,7 @@ from __future__ import print_function
 from PIL import Image , ImageTk
 from tkinter import Tk, BOTH, Canvas
 from tkinter.ttk import Frame , Label , Style, Entry, Button
+from PyUtilities import setColRowWeight
 
 
 class Example(Frame):

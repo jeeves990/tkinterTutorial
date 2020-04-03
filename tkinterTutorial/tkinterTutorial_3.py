@@ -78,12 +78,9 @@ class Example(Frame):
             w.unbind("<Button-1>")
 
     def quitApp(self, e):
-        ret = MB.askquestion("Question", "Are you sure you wish to quit?", default = MB.NO)
-        if (ret == "yes"):
+        if MB.askokcancel("Question", "Are you sure you wish to quit?"):
             self.quit()
-        else:
-            return
-
+        
 
     def onButton1Click(self):
         print("Push Button clicked")

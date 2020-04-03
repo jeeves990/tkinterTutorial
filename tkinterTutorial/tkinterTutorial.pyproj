@@ -4,13 +4,15 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>74fa3437-8075-4004-b566-0bc18e786fc0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tkinterTutorial_3_11_floatingwindow.py</StartupFile>
+    <StartupFile>testRegistry__.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>tkinterTutorial</Name>
     <RootNamespace>tkinterTutorial</RootNamespace>
+    <InterpreterId>CondaEnv|CondaEnv|Anaconda3</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +23,53 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PyStub.py" />
+    <Compile Include="PyUtilities.py" />
+    <Compile Include="testRegistry00 - Copy.py" />
+    <Compile Include="testRegistry00.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="testRegistry__ - Copy.py" />
+    <Compile Include="testRegistry__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyTkFontChooser.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyFontChooser.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="testNotebook.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_6_4_listbox.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GlobalErrorHandling.py" />
+    <Compile Include="tkinterTutorial_5_menus.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_4_14_scrollbars.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_4_12_scale_spinbox_optionmenu.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_4_11_CheckBtnNEdit.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_4_10_entry.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_4_11_RBtnNEdit.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_3_13_notification.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tkinterTutorial_3_12_splash.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tkinterTutorial_3_11_floatingwindow.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +98,21 @@
     <Compile Include="tkinterTutorial_2.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="CondaEnv|CondaEnv|Anaconda3" />
+    <InterpreterReference Include="CondaEnv|CondaEnv|env" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="Virtual env1\">
+      <Id>Virtual env1</Id>
+      <Version>3.7</Version>
+      <Description>Virtual env1 (Python 3.7 (32-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X86</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

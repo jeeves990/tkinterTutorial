@@ -2,10 +2,12 @@
 import tkinter as tk
 from tkinter import messagebox as MB
 import traceback
+import clipboard  as CB
 
-class GlobalErrorHandler:
+class GlobalErrorHandler(object):
     def __init__(self, masterWindow):
-         masterWindow.report_callback_exception = self.report_callback_exception
+        object.__init__(self)
+        masterWindow.report_callback_exception = self.report_callback_exception
 
     def report_callback_exception(self, *args):
         err = traceback.format_exception(*args)
@@ -13,6 +15,8 @@ class GlobalErrorHandler:
         for er in err:
             errFormatted += er + '\n__'
         errFormatted = errFormatted[:-3]
+        CB.copy(errFormatted)
+
         MB.showerror('Exception', errFormatted)
 
 class App(GlobalErrorHandler):
