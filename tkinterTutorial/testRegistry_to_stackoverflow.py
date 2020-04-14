@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter.ttk import Treeview
 import tkinter.ttk as ttk
 from tkinter import PanedWindow, Frame, Label, BOTH, VERTICAL, HORIZONTAL, Entry, Scale, Button,\
-        Menu, messagebox as MSGBOX, DoubleVar, IntVar, StringVar, LEFT, Canvas, OptionMenu
+        Menu, messagebox as MSGBOX, DoubleVar, IntVar, StringVar, LEFT, Canvas, OptionMenu, LabelFrame
 
 import sys
 
@@ -21,10 +21,20 @@ TVUCOLUMNS = {
              }
 
 
-def setColRowWeight(obj, col_weight = 1, row_weight = 1):
+def setColRowWeight(obj, row_weight = 1, col_weight = 1, **kwargs):
     try:
         colCount, rowCount = obj.grid_size()
-    
+        if 'colCount' in kwargs:
+            colCount = kwargs['colCount']
+        if 'rowCount' in kwargs:
+            rowCount = kwargs['rowCount']
+        if not colCount:
+            colCount = 1
+        if not rowCount:
+            rowCount = 1
+
+
+        
         for i in range(0, rowCount):
             obj.grid_rowconfigure(i, weight = row_weight)
 
@@ -71,9 +81,10 @@ class InitUI(Frame):
                           sashwidth = 6, sashrelief = 'sunken',
                           relief = 'groove')
         
-        maintreeFrame = pnTreeWin = Frame(self.pnWin, bg = 'yellow')
+        #maintreeFrame = 
+        pnTreeWin = LabelFrame(self.pnWin, bg = 'yellow', text = 'yellow: mainTreeFrame')
         self.bldHiveView(pnTreeWin)
-        setColRowWeight(pnTreeWin, 2, 2)
+        setColRowWeight(pnTreeWin) ##, colCount = 2, rowCount = 0)
 
         self.pnWin.paneconfig(pnTreeWin, minsize = 250)
         
@@ -86,7 +97,7 @@ class InitUI(Frame):
         self.addValueTvu(valueFrame)
         
         self.pnWin.pack(fill = BOTH, anchor = 'center', padx = 4, pady = 4, expand = True)
-
+        
     
     def addValueTvu(self, frm):
         self.valTvu = Treeview(frm)
@@ -107,40 +118,44 @@ class InitUI(Frame):
 
     def bldHiveView(self, pnTreeWin):
         chooseFrame = Frame(pnTreeWin)
+        chooseFrame['bg'] = pnTreeWin['bg']
         cbOpt = ttk.Combobox(chooseFrame, justify = 'center')
         
         setColRowWeight(cbOpt)
-        cbOpt.grid(row = 0, column = 0, sticky = 'ew', columnspan = 2)
+        cbOpt.grid(row = 0, column = 0, sticky = 'ew', columnspan = 3)
+        setColRowWeight(cbOpt, rowCount = 1, col_weight = 1, colCount = 3)
 
         self.treebldbtn = Button(chooseFrame, text = 'Build')
-        
-        self.treebldbtn.grid(row = 0, column = 2, padx = 3, sticky = 'e')
+        self.treebldbtn.grid(row = 0, column = 3, padx = 3, sticky = 'e')
+
         chooseFrame.grid(sticky = 'new', columnspan = 3)
         setColRowWeight(chooseFrame)
 
         def buildHiveTvu():
-            
-            hiveTreeFrame = Frame(pnTreeWin, bg = 'turquoise')
-        
-            self.hiveTvu = Treeview(hiveTreeFrame, padding = (2,2,2,2))
-        
-            ysb = ttk.Scrollbar(hiveTreeFrame, orient='vertical', command=self.hiveTvu.yview)
-            xsb = ttk.Scrollbar(hiveTreeFrame, orient='horizontal', command=self.hiveTvu.xview)
-            self.hiveTvu.configure(yscroll=ysb.set, xscroll=xsb.set)
-            
-            self.hiveTvu.heading('#0', text = 'Registry Hive', anchor = 'w')
-            
-            setColRowWeight(self.hiveTvu, 3, 3)
-            
-            self.hiveTvu.grid(row = 1, column = 0, sticky = 'news', 
-                               rowspan = 2, columnspan = 2)
+            hiveTreeFrame = LabelFrame(pnTreeWin, text = 'turquoise', bg = 'turquoise')
+            lbl = Label(hiveTreeFrame, text = 'hiveTreeFrame')
+            lbl.grid(row = 0, column = 0, columnspan = 2, rowspan = 1, sticky = 'new')
+            setColRowWeight(lbl,  colCount = 0, rowCount = 0)
 
-            hiveTreeFrame.grid(row = 2, column = 0, sticky = 'news', 
-                               rowspan = 6, columnspan = 3)
-            setColRowWeight(hiveTreeFrame, row_weight = 3)
-            colCount, rowCount = hiveTreeFrame.grid_size()
+            self.hiveTreeview = Treeview(hiveTreeFrame, padding = (2,2,2,2))
+            self.hiveTreeview.heading('#0', text = 'Registry Hive', anchor = 'w')
             
-            ysb.grid(row = 1, column = colCount, sticky = 'ns', rowspan = rowCount)
+            
+            ysb = ttk.Scrollbar(hiveTreeFrame, orient='vertical', command=self.hiveTreeview.yview)
+            xsb = ttk.Scrollbar(hiveTreeFrame, orient='horizontal', command=self.hiveTreeview.xview)
+            self.hiveTreeview.configure(yscroll=ysb.set, xscroll=xsb.set)
+            
+            self.hiveTreeview.grid(row = 0, column = 0, sticky = 'news', rowspan = 3, columnspan = 2)
+
+            # ---- if hiveTreeFrame row == 0 it is sticky just right 
+            # -------- but it covers the Combobox.
+            # --BUT-- set it to row == 1, where it should be AND it is sticky 'ews' 
+            # -----------but only a ratio of north
+            hiveTreeFrame.grid(row = 1, column = 0, sticky = 'news', rowspan = 6, columnspan = 3)
+            setColRowWeight(hiveTreeFrame, row_weight = 1, rowCount = 2)
+
+            colCount, rowCount = hiveTreeFrame.grid_size()
+            ysb.grid(row = 0, column = colCount, sticky = 'ns', rowspan = rowCount)
             xsb.grid(row = rowCount +1, column = 0, sticky = 'we', columnspan = colCount)
           
         buildHiveTvu()

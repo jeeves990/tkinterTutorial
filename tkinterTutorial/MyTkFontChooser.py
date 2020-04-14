@@ -507,10 +507,7 @@ import clipboard
 
 if __name__ == "__main__":
     """Example."""
-    try:
-        from tkinter import Tk
-    except ImportError:
-        from Tkinter import Tk
+    from tkinter import Tk
     from sys import platform
 
 
@@ -528,12 +525,18 @@ if __name__ == "__main__":
             win.configure(bg=bg)
 
             self.lblVar = tk.StringVar()
-            self.lbl = tk.Label(self.win, text='Chosen font: ', textvariable = self.lblVar).pack(padx=10, pady=(10, 4))
+            self.lblVar.set('Chosen font:')
+            self.lblfont = tk.Label(self.win, textvariable = self.lblVar)
+            self.lblfont.pack(padx=10, pady=(10, 4))
             
-            print('type(self.lbl) is ', type(self.lbl))
-            clipBtn = Button(win, text='clipboard', command = self.add2clipboard).pack(padx=10, pady=(4,10), side = 'right')
+            clipBtn = Button(win, text='clipboard', command = self.add2clipboard)
+            clipBtn.pack(padx=10, pady=(4,10), side = 'right')
             print('type(clipBtn) is ', type(clipBtn))
-            Button(win, text='Font Chooser', command = self.callback).pack(padx=10, pady=(4, 10), side = 'left')
+            Button(win, text='Font Chooser', command = self.getFont).pack(padx=10, pady=(4, 10), side = 'left')
+
+
+        def setLblFont(self, _font):
+            self.lblfont.config(font = _font)
 
 
         def add2clipboard(self):
@@ -541,7 +544,7 @@ if __name__ == "__main__":
                 clipboard.copy(self.chosenFont)
 
         
-        def callback(self):
+        def getFont(self):
             font = askfont(self.win, title="Choose a font")
             if font:
                 # spaces in the family name need to be escaped
@@ -553,12 +556,12 @@ if __name__ == "__main__":
                 
                 if font['overstrike']:
                     font_str += ' overstrike'
+                
                 self.chosenFont = font_str.replace('\ ', ' ')
-                self.lblVar = 'Chosen font: ' + self.chosenFont
-                self.lbl['font'] = font_str
+                self.setLblFont(font)
+                self.lblVar.set('Chosen font: ' + self.chosenFont)
+                #self.lbl['font'] = font_str
 
-
-        
     win = Tk()
     win.attributes('-topmost', True)
     GetFont(win)
