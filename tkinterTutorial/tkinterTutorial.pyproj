@@ -23,13 +23,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PyStub.py" />
-    <Compile Include="PyUtilities.py" />
-    <Compile Include="testRegistry00 - Copy.py" />
-    <Compile Include="testRegistry00.py">
+    <Compile Include="ModalDialog.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="testRegistry__ - Copy.py" />
+    <Compile Include="testRegistry_childDlg - Copy.py" />
+    <Compile Include="testRegistry_childDlg.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="threadWTrace.py" />
+    <Compile Include="tstModelessDlg.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PyStub.py" />
+    <Compile Include="PyUtilities.py" />
+    <Compile Include="keepstuff\testRegistry00 - Copy.py" />
+    <Compile Include="keepstuff\testRegistry_buildsLisBox1lvl.py" />
+    <Compile Include="testRegistry_to_stackoverflow.py" />
     <Compile Include="testRegistry__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -113,6 +122,9 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X86</Architecture>
     </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="keepstuff\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

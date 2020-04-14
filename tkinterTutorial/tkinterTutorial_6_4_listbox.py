@@ -92,7 +92,7 @@ class Example(Frame):
             self.lblFont['text'] = fontString.replace('\ ', ' ')
 
 
-    def chooseFont(self):
+    def chooseFont(self):F
         font_ = askfont(self.win)
         print(font_)
         ##self.lblFont.config(text = font_, font = font_)
